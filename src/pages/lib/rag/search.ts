@@ -53,7 +53,7 @@ export const getTopChunks = async (
 
   const scored = embeddedChunks.map((chunk) => ({
     ...chunk,
-    score: cosineSimilarity(queryVector, chunk.vector),
+    score: cosineSimilarity(queryVector, chunk.vector as number[]),
   }));
 
   const sorted = scored.sort((a, b) => b.score - a.score);
