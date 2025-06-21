@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getTopChunks, loadAndEmbedChunks } from "@/pages/lib/rag/search";
+import { getTopChunks, loadAndEmbedChunks } from "@/lib/rag/search";
 
 export default async function handler(
   req: NextApiRequest,

@@ -1,17 +1,10 @@
 import { pipeline } from "@xenova/transformers";
 import { getChunksFromResume } from "./index";
-import { cosineSimilarity } from "./similarity";
+import { cosineSimilarity } from "../../lib/rag/similarity";
+import { EmbeddedChunk, Vector } from "../../lib/rag/types";
 
 // Embedder instance shared across functions
 let embedder: any;
-
-// Define embedded vector chunk type
-export type EmbeddedChunk = {
-  id: string;
-  source: string;
-  content: string;
-  vector: number[];
-};
 
 // Holds all embedded resume chunks
 let embeddedChunks: EmbeddedChunk[] = [];
@@ -30,7 +23,7 @@ export const loadAndEmbedChunks = async () => {
       pooling: "mean",
       normalize: true,
     });
-    const vector = Array.from(output.data) as number[];
+    const vector = Array.from(output.data) as Vector;
     embeddedChunks.push({ ...chunk, vector });
   }
 };
@@ -49,11 +42,11 @@ export const getTopChunks = async (
     normalize: true,
   });
 
-  const queryVector = Array.from(output.data) as number[];
+  const queryVector = Array.from(output.data) as Vector;
 
   const scored = embeddedChunks.map((chunk) => ({
     ...chunk,
-    score: cosineSimilarity(queryVector, chunk.vector as number[]),
+    score: cosineSimilarity(queryVector, chunk.vector as Vector), // ✅ explicit cast
   }));
 
   const sorted = scored.sort((a, b) => b.score - a.score);
