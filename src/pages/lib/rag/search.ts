@@ -18,7 +18,7 @@ export const loadAndEmbedChunks = async () => {
       pooling: "mean",
       normalize: true,
     });
-    const vector = Array.from(output.data);
+    const vector = Array.from(output.data) as number[];
     embeddedChunks.push({ ...chunk, vector });
   }
 };
@@ -30,7 +30,7 @@ export const getTopChunks = async (query: string, topN = 3) => {
   }
 
   const output = await embedder(query, { pooling: "mean", normalize: true });
-  const queryVector = Array.from(output.data);
+  const queryVector = Array.from(output.data) as number[];
 
   const scored = embeddedChunks.map((chunk) => ({
     ...chunk,
