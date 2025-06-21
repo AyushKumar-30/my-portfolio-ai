@@ -3,7 +3,14 @@ import { getChunksFromResume } from "./index";
 import { cosineSimilarity } from "./similarity";
 
 let embedder: any;
-let embeddedChunks: any[] = [];
+type EmbeddedChunk = {
+  id: string;
+  source: string;
+  content: string;
+  vector: number[];
+};
+
+let embeddedChunks: EmbeddedChunk[] = [];
 
 export const loadAndEmbedChunks = async () => {
   if (!embedder) {
