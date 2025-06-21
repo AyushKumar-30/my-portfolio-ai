@@ -44,11 +44,15 @@ export const getTopChunks = async (
 
   const queryVector = Array.from(output.data) as Vector;
 
-  const scored = embeddedChunks.map((chunk) => ({
-    ...chunk,
-    score: cosineSimilarity(queryVector, chunk.vector as Vector), // ✅ explicit cast
-  }));
+  const scored = embeddedChunks.map((chunk) => {
+    const vectorA = queryVector.map(Number); // 🛠 ensure number[]
+    const vectorB = (chunk.vector as unknown[]).map(Number); // 🛠 forcefully sanitize
 
+    return {
+      ...chunk,
+      score: cosineSimilarity(vectorA, vectorB),
+    };
+  });
   const sorted = scored.sort((a, b) => b.score - a.score);
   return sorted.slice(0, topN);
 };
