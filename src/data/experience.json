@@ -1,0 +1,49 @@
+[
+  {
+    "company": "Arizona State University",
+    "role": "Software Engineer",
+    "location": "Tempe, AZ",
+    "date": "May 2024 – Present",
+    "bullets": [
+      "Built reusable frontend layouts with React.js + Next.js, powering scalable flows for 90k+ users/month.",
+      "Designed RESTful microservices using Spring Boot, Java, and PostgreSQL with SSR integration, improving SEO and driving 40% organic growth.",
+      "Led a team of 8 on a $2M academic project, integrating third-party data via custom PHP and REST APIs."
+    ],
+    "techStack": ["React.js", "Next.js", "Spring Boot", "Java", "PostgreSQL", "PHP"]
+  },
+  {
+    "company": "Autonomous Systems Lab (ASU)",
+    "role": "AI/ML Full Stack Developer",
+    "location": "Tempe, AZ",
+    "date": "Dec 2023 – Feb 2024",
+    "bullets": [
+      "Developed ETL pipelines for 10GB+ daily sensor data with preprocessing and downsampling.",
+      "Engineered custom tokenization and embedding pipelines using spaCy + Hugging Face for failure log classification.",
+      "Built object detection training datasets using PyTorch and labeled schema pipelines."
+    ],
+    "techStack": ["Python", "spaCy", "Hugging Face", "PyTorch", "ETL"]
+  },
+  {
+    "company": "Gasify Middle East",
+    "role": "Web Developer",
+    "location": "Remote, UAE",
+    "date": "May 2023 – July 2023",
+    "bullets": [
+      "Built a multilingual B2B website using WordPress + Elementor to showcase industrial product catalogs.",
+      "Created custom PHP plugins and REST APIs for syncing inventory data into WordPress backend.",
+      "Improved page speed by 1.8s and raised mobile Lighthouse score from 62 → 91 using JS + CSS optimization."
+    ],
+    "techStack": ["WordPress", "PHP", "Elementor", "JavaScript", "REST API"]
+  },
+  {
+    "company": "Dev Speak Pvt. Ltd.",
+    "role": "Software Engineer Intern",
+    "location": "Remote, India",
+    "date": "Aug 2022 – Sep 2022",
+    "bullets": [
+      "Integrated GraphQL APIs and Node.js scripts to improve data fetch performance with normalized caching.",
+      "Maintained Docker-based CI/CD pipelines via Jenkins, improving feedback cycles by 40%."
+    ],
+    "techStack": ["GraphQL", "Node.js", "Docker", "Jenkins"]
+  }
+]

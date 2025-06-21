@@ -1,0 +1,34 @@
+{
+  "name": "Ayush Kumar",
+  "title": "Full Stack Software Engineer",
+  "location": "Tempe, AZ",
+  "currentRole": "Software Engineer at Arizona State University",
+  "summary": "Curious and creative full-stack engineer who builds scalable tools that people actually use. I work across the stack (70% frontend, 30% backend) with a growing interest in GenAI.",
+  "bio": [
+    "I'm currently working at Arizona State University, building responsive web platforms used by over 90,000 users monthly.",
+    "I led a team of 8 on a $2M+ academic project, collaborating with top university professors to ship real web tools.",
+    "At ASU’s Autonomous Systems Lab, I created structured datasets from messy sensor data and built AI/ML models for real-time system diagnostics.",
+    "I’ve helped companies in the UAE and India revamp their digital presence using WordPress, PHP, and custom APIs.",
+    "I'm passionate about cross-functional collaboration — brainstorming designs, debugging backend logic, or shipping fast."
+  ],
+  "projects": [
+    {
+      "name": "RepGenie",
+      "summary": "An AI-powered fitness tracker with LLM-generated workout plans and user-friendly tracking UI."
+    },
+    {
+      "name": "Connectify",
+      "summary": "A real-time chat app with group chats and a voice calling feature under development."
+    }
+  ],
+  "personal": {
+    "hobbies": ["Working out", "Building side projects", "Mentoring teammates"],
+    "funFact": "I clear my mind at the gym — it keeps me focused, energized, and balanced."
+  },
+  "education": {
+    "school": "Arizona State University",
+    "program": "MS in Computer Engineering",
+    "scholarship": "100% scholarship awarded among 30,000+ applicants"
+  },
+  "currentlyExploring": ["AI/ML", "Human-centered design", "LLMs", "Next.js", "Cloud infra"]
+}

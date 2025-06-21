@@ -1,0 +1,16 @@
+[
+  {
+    "name": "RepGenie",
+    "date": "Jan 2024",
+    "description": "AI-powered workout tracking app with LLM-generated routines, user auth, and responsive UI for 1,000 beta users.",
+    "techStack": ["React.js", "Next.js", "Tailwind", "PostgreSQL", "tRPC", "AWS", "OpenAI"],
+    "link": "https://github.com/ayush/repgenie"
+  },
+  {
+    "name": "Connectify",
+    "date": "Apr 2024",
+    "description": "Chat app with SSR layout, chat history, group creation, and calling feature (in progress); supports 500+ users.",
+    "techStack": ["Next.js", "ConvexDB", "Node.js", "TypeScript"],
+    "link": "https://github.com/ayush/connectify"
+  }
+]
