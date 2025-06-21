@@ -2,16 +2,21 @@ import { pipeline } from "@xenova/transformers";
 import { getChunksFromResume } from "./index";
 import { cosineSimilarity } from "./similarity";
 
+// Embedder instance shared across functions
 let embedder: any;
-type EmbeddedChunk = {
+
+// Define embedded vector chunk type
+export type EmbeddedChunk = {
   id: string;
   source: string;
   content: string;
   vector: number[];
 };
 
+// Holds all embedded resume chunks
 let embeddedChunks: EmbeddedChunk[] = [];
 
+// Load + embed chunks once at server startup
 export const loadAndEmbedChunks = async () => {
   if (!embedder) {
     embedder = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2");
@@ -30,13 +35,20 @@ export const loadAndEmbedChunks = async () => {
   }
 };
 
-// Get top N matching chunks for a user query
-export const getTopChunks = async (query: string, topN = 3) => {
+// Compute cosine similarity and return top N matches
+export const getTopChunks = async (
+  query: string,
+  topN = 3
+): Promise<EmbeddedChunk[]> => {
   if (!embedder) {
     embedder = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2");
   }
 
-  const output = await embedder(query, { pooling: "mean", normalize: true });
+  const output = await embedder(query, {
+    pooling: "mean",
+    normalize: true,
+  });
+
   const queryVector = Array.from(output.data) as number[];
 
   const scored = embeddedChunks.map((chunk) => ({
@@ -44,5 +56,6 @@ export const getTopChunks = async (query: string, topN = 3) => {
     score: cosineSimilarity(queryVector, chunk.vector),
   }));
 
-  return scored.sort((a, b) => b.score - a.score).slice(0, topN);
+  const sorted = scored.sort((a, b) => b.score - a.score);
+  return sorted.slice(0, topN);
 };
