@@ -3,13 +3,13 @@ import { getChunksFromResume } from "./index";
 import { cosineSimilarity } from "../../lib/rag/similarity";
 import { EmbeddedChunk, Vector } from "../../lib/rag/types";
 
-// Embedder instance shared across functions
+// Shared embedder instance
 let embedder: any;
 
-// Holds all embedded resume chunks
+// Holds vectorized chunks
 let embeddedChunks: EmbeddedChunk[] = [];
 
-// Load + embed chunks once at server startup
+// One-time embedding for all resume chunks
 export const loadAndEmbedChunks = async () => {
   if (!embedder) {
     embedder = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2");
@@ -23,12 +23,16 @@ export const loadAndEmbedChunks = async () => {
       pooling: "mean",
       normalize: true,
     });
-    const vector = Array.from(output.data) as Vector;
+
+    const vector = Array.from(output.data).map((v) =>
+      typeof v === "number" ? v : Number(v)
+    ) as Vector;
+
     embeddedChunks.push({ ...chunk, vector });
   }
 };
 
-// Compute cosine similarity and return top N matches
+// Retrieve top N relevant chunks for a query
 export const getTopChunks = async (
   query: string,
   topN = 3
@@ -42,17 +46,20 @@ export const getTopChunks = async (
     normalize: true,
   });
 
-  const queryVector = Array.from(output.data) as Vector;
+  const queryVector = Array.from(output.data).map((v) =>
+    typeof v === "number" ? v : Number(v)
+  ) as Vector;
 
   const scored = embeddedChunks.map((chunk) => {
-    const vectorA = queryVector.map(Number); // 🛠 ensure number[]
-    const vectorB = (chunk.vector as unknown[]).map(Number); // 🛠 forcefully sanitize
+    const chunkVector = Array.isArray(chunk.vector)
+      ? chunk.vector.map((v) => (typeof v === "number" ? v : Number(v)))
+      : [];
 
     return {
       ...chunk,
-      score: cosineSimilarity(vectorA, vectorB),
+      score: cosineSimilarity(queryVector, chunkVector),
     };
   });
-  const sorted = scored.sort((a, b) => b.score - a.score);
-  return sorted.slice(0, topN);
+
+  return scored.sort((a, b) => b.score - a.score).slice(0, topN);
 };
